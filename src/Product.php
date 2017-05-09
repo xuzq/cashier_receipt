@@ -40,6 +40,13 @@ class Product {
 			return false;
 		}
 	}
+	public function getProductById($productId) {
+		if (isset(self::$products[$productId])) {
+			return self::$products[$productId];
+		} else {
+			return array();
+		}
+	}
 
 }
 
