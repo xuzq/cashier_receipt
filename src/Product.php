@@ -28,7 +28,63 @@ class Product {
 				'price'			=> 5.5,
 				'unit'			=> '斤',
 				),
+			'ITEM000004' => array(
+				'product_id'	=> 'ITEM000004',
+				'name'			=> '可口可乐',
+				'price'			=> 3,
+				'unit'			=> '瓶',
+				),
+			'ITEM000005' => array(
+				'product_id'	=> 'ITEM000005',
+				'name'			=> '羽毛球',
+				'price'			=> 1,
+				'unit'			=> '个',
+				),
+			'ITEM000006' => array(
+				'product_id'	=> 'ITEM000006',
+				'name'			=> '苹果',
+				'price'			=> 5.5,
+				'unit'			=> '斤',
+				),
+			'ITEM000007' => array(
+				'product_id'	=> 'ITEM000007',
+				'name'			=> '可口可乐',
+				'price'			=> 3,
+				'unit'			=> '瓶',
+				),
+			'ITEM000008' => array(
+				'product_id'	=> 'ITEM000008',
+				'name'			=> '羽毛球',
+				'price'			=> 1,
+				'unit'			=> '个',
+				),
+			'ITEM000009' => array(
+				'product_id'	=> 'ITEM000009',
+				'name'			=> '苹果',
+				'price'			=> 5.5,
+				'unit'			=> '斤',
+				),
+			'ITEM0000010' => array(
+				'product_id'	=> 'ITEM0000010',
+				'name'			=> '可口可乐',
+				'price'			=> 3,
+				'unit'			=> '瓶',
+				),
+			'ITEM0000011' => array(
+				'product_id'	=> 'ITEM0000011',
+				'name'			=> '羽毛球',
+				'price'			=> 1,
+				'unit'			=> '个',
+				),
+			'ITEM0000012' => array(
+				'product_id'	=> 'ITEM0000012',
+				'name'			=> '苹果',
+				'price'			=> 5.5,
+				'unit'			=> '斤',
+				),
+
 			);
+
 	public function __construct(){
 		
 	}

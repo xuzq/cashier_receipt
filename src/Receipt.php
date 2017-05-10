@@ -52,7 +52,7 @@ class Receipt {
 		$amount = $product['fee']['amount'];
 
 		$str = '';
-		$str .= "名称: " . $name . "，数量: " . $num . $unit . "，单价" . $price . "（元），小计：" . $amount . "（元）";
+		$str .= "名称: " . $name . "，数量: " . $num . $unit . "，单价" . sprintf("%.2f", $price) . "（元），小计：" . sprintf("%.2f", $amount) . "（元）";
 
 		return $str;
 	}
@@ -66,6 +66,7 @@ class Receipt {
 		$title1 = "买二赠一商品：\n";
 		$totalAmount = 0;
 		$totalFree = 0;
+		$totalFreeCount = 0;
 		$str = $receiptTitle;
 		foreach ($this->productsInfo as $product) {
 			switch ($product['fee']['prom_type']) {
@@ -85,11 +86,12 @@ class Receipt {
 						$freeProduct[$name]['free_count'] 	= $freeCount;
 						$freeProduct[$name]['unit']			= $unit;
 					}
+					$totalFreeCount += $freeCount;
 
 					break;
 				case Promotion::PROM_TYPE_DISCOUNT:
 					$str .= $this->getReceiptStr($product); 
-					$str .= "，节省" . $product['fee']['free'] . "（元）\n";
+					$str .= "，节省" . sprintf("%.2f", $product['fee']['free']) . "（元）\n";
 					$totalAmount += $product['fee']['amount'];
 					$totalFree += $product['fee']['free'];
 					break;
@@ -105,16 +107,22 @@ class Receipt {
 					break;
 			}
 		}
-		if (!empty($freeProduct)) {
-			$str .= $separator1;
+
+		/* 打印买二增一优惠 */
+		if ($freeCount && !empty($freeProduct)) {
+			$str .= $separator1 . $title1;
 			foreach($freeProduct as $key => $value) {
-				$str .= $title1 . "名称: " . $key . "，数量: " . $value['free_count'] . $value['unit'] . "\n";
+				if ($value['free_count']) {
+					$str .= "名称: " . $key . "，数量: " . $value['free_count'] . $value['unit'] . "\n";
+				}
 			}
 		}
 
 		$str .= $separator1;
-		$str .= "总计：" . $totalAmount . "（元）\n";
-		$str .= "节省：" . $totalFree . "（元）\n";
+		$str .= "总计：" . sprintf("%.2f", $totalAmount) . "（元）\n";
+		if ($totalFree) {
+			$str .= "节省：" . sprintf("%.2f", $totalFree) . "（元）\n";
+		}
 		$str .= $separator2;
 
 		echo $str;
@@ -126,6 +134,10 @@ class Receipt {
 	}
 
 	public function adjustProducts() {
+		if (empty($this->products)) {
+			error_log("Invalid product ");
+			exit();
+		}
 		$productsArr = array();
 		foreach($this->products as $pro) {
 			$val = explode('-', $pro);
