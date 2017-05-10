@@ -104,6 +104,11 @@ class Promotion {
 		
 	}
 
+	/**
+	 * 根据产品信息，以及产品的个数，获取该产品的优惠费用信息
+	 * @param array $productInfo 产品信息
+	 * @param int 	$num		 产品数量
+	 */
 	public function getFeeInfoByProduct($productInfo, $num) {
 		$promotion = array();
 		foreach (self::$promotionList as $value) {
@@ -122,6 +127,7 @@ class Promotion {
 					);
 		}
 
+		/* 按优先级降序排序 */
 		krsort($promotion);
 		foreach($promotion as $value) {
 			$promotion = $value;

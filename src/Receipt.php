@@ -23,6 +23,11 @@ class Receipt {
 		$this->promotionObj = new Promotion();
 	}
 
+	/**
+	 * 根据产品ID，产品数量技术费用
+	 * @param int $productId 	产品ID
+	 * @param int $num			产品数量
+	 */
 	public function computeAmount($productId, $num) {
 		$productInfo = $this->productObj->getProductById($productId);
 		$feeInfo = $this->promotionObj->getFeeInfoByProduct($productInfo, $num);
@@ -57,6 +62,9 @@ class Receipt {
 		return $str;
 	}
 
+	/**
+	 * 打印小票
+	 */
 	public function printProductReceipt() {
 		$freeProduct = array();
 
