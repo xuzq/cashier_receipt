@@ -117,7 +117,7 @@ class Receipt {
 		}
 
 		/* 打印买二增一优惠 */
-		if ($freeCount && !empty($freeProduct)) {
+		if ($totalFreeCount && !empty($freeProduct)) {
 			$str .= $separator1 . $title1;
 			foreach($freeProduct as $key => $value) {
 				if ($value['free_count']) {
@@ -150,7 +150,11 @@ class Receipt {
 		foreach($this->products as $pro) {
 			$val = explode('-', $pro);
 			if ($this->productObj->isValidProduct($val[0])) {
-				$productsArr[$val[0]] += isset($val[1]) ? $val[1] : 1;
+				if (isset($productsArr[$val[0]])) {
+					$productsArr[$val[0]] += isset($val[1]) ? $val[1] : 1;
+				} else {
+					$productsArr[$val[0]] = isset($val[1]) ? $val[1] : 1;
+				}
 			} else {
 				error_log("Invalid product " . var_export($pro, true));
 				exit();
